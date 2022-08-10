@@ -85,7 +85,7 @@ columns=fullflexible
 %\newtheorem{algorithm}{Algorithm}[section]
 %\newtheorem{cor}{Corollary}
 \newcommand{\BEQA}{\begin{eqnarray}}
-\newcommand{\EEQA}{\end{eqnarray}}
+          \newcommand{\EEQA}{\end{eqnarray}}
 \newcommand{\define}{\stackrel{\triangle}{=}}
 
 \bibliographystyle{IEEEtran}
@@ -109,7 +109,7 @@ columns=fullflexible
 \newtheorem{rem}{Remark}
 \newcommand{\sgn}{\mathop{\mathrm{sgn}}}
 \providecommand{\abs}[1]{\left\vert#1\right\vert}
-\providecommand{\res}[1]{\Res\displaylimits_{#1}} 
+\providecommand{\res}[1]{\Res\displaylimits_{#1}}
 \providecommand{\norm}[1]{\lVert#1\rVert}
 \providecommand{\mtx}[1]{\mathbf{#1}}
 \providecommand{\mean}[1]{E\left[ #1 \right]}
@@ -118,7 +118,7 @@ columns=fullflexible
 
 %\providecommand{\hilbert}{\overset{\mathcal{H}}{ \rightleftharpoons}}
 \providecommand{\system}{\overset{\mathcal{H}}{ \longleftrightarrow}}
-	%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
+%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
 \newcommand{\solution}{\noindent \textbf{Solution: }}
 \providecommand{\dec}[2]{\ensuremath{\overset{#1}{\underset{#2}{\gtrless}}}}
 \numberwithin{equation}{section}
@@ -137,18 +137,18 @@ columns=fullflexible
 %\numberwithin{figure}{subsection}
 
 \def\putbox#1#2#3{\makebox[0in][l]{\makebox[#1][l]{}\raisebox{\baselineskip}[0in][0in]{\raisebox{#2}[0in][0in]{#3}}}}
-     \def\rightbox#1{\makebox[0in][r]{#1}}
-     \def\centbox#1{\makebox[0in]{#1}}
-     \def\topbox#1{\raisebox{-\baselineskip}[0in][0in]{#1}}
-     \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
+\def\rightbox#1{\makebox[0in][r]{#1}}
+\def\centbox#1{\makebox[0in]{#1}}
+\def\topbox#1{\raisebox{-\baselineskip}[0in][0in]{#1}}
+\def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
 
 \vspace{3cm}
 
-\title{ 
-%\logo{
-Digital Signal Processing
-%}
-%	\logo{Octave for Math Computing }
+\title{
+     %\logo{
+     Digital Signal Processing
+     %}
+     %	\logo{Octave for Math Computing }
 }
 %\title{
 %	\logo{Matrix Analysis through Octave}{\begin{center}\includegraphics[scale=.24]{tlc}\end{center}}{}{HAMDSP}
@@ -170,12 +170,12 @@ Digital Signal Processing
 %
 
 \author{ Shivanshu \\ AI21bBTECH11027 %<-this  stops a space
-\thanks{*The author is a student with the Department
-of Artificial Intelligence, Indian Institute of Technology, Hyderabad
-502285 India e-mail:  ai21btech11027@iith.ac.in
-.}% <-this % stops a space
-%\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-%\thanks{Manuscript received April 19, 2005; revised January 11, 2007.}}
+     \thanks{*The author is a student with the Department
+          of Artificial Intelligence, Indian Institute of Technology, Hyderabad
+          502285 India e-mail:  ai21btech11027@iith.ac.in
+          .}% <-this % stops a space
+     %\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
+     %\thanks{Manuscript received April 19, 2005; revised January 11, 2007.}}
 }
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -238,7 +238,7 @@ of Artificial Intelligence, Indian Institute of Technology, Hyderabad
 \bigskip
 
 \begin{abstract}
-This manual provides a simple introduction to digital signal processing.
+     This manual provides a simple introduction to digital signal processing.
 \end{abstract}
 \section{Software Installation}
 Run the following commands
@@ -249,188 +249,261 @@ sudo pip install cffi pysoundfile
 \end{lstlisting}
 \section{Digital Filter}
 \begin{enumerate}[label=\thesection.\arabic*
-,ref=\thesection.\theenumi]
-\item
-\label{prob:input}
-Download the sound file from  
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/ 
-EE1310/master/filter/codes/Sound_Noise.wav
+          ,ref=\thesection.\theenumi]
+     \item
+           \label{prob:input}
+           Download the sound file from
+           \begin{lstlisting}
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/Sound_Noise.wav
 \end{lstlisting}
-%\href{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}{\url{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}}  
-%in the link given below.
-%\linebreak
-\item
-\label{prob:spectrogram}
-You will find a spectrogram at \href{https://academo.org/demos/spectrum-analyzer}{\url{https://academo.org/demos/spectrum-analyzer}}. 
-%\end{problem}
-%%
-%
-%%\onecolumn
-%%\input{./figs/fir}
-%\begin{problem}
-Upload the sound file that you downloaded in Problem \ref{prob:input} in the spectrogram  and play.  Observe the spectrogram. What do you find?
-\\
-%
-\solution There are a lot of yellow lines between 440 Hz to 5.1 KHz.  These represent the synthesizer key tones. Also, the key strokes
-are audible along with background noise.
-% By observing spectrogram, it clearly shows that tonal frequency is under 4kHz. And above 4kHz only noise is present.
-\item
-\label{prob:output}
-Write the python code for removal of out of band noise and execute the code.
-\\
-\solution
-\lstinputlisting{./codes/Cancel_noise.py}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=\columnwidth]{enc_block_diag.png}
-%\caption{}
-%\label{fig:convolution encoder}
-%\end{figure}
-%\input{block_enc}
-\item
-The output of the python script in Problem \ref{prob:output} is the audio file Sound\_With\_ReducedNoise.wav. Play the file in the spectrogram in Problem \ref{prob:spectrogram}. What do you observe?
-\\
-\solution The key strokes as well as background noise is subdued in the audio.  Also,  the signal is blank for frequencies above 5.1 kHz.
+           %\href{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}{\url{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}}  
+           %in the link given below.
+           %\linebreak
+     \item
+           \label{prob:spectrogram}
+           You will find a spectrogram at \href{https://academo.org/demos/spectrum-analyzer}{\url{https://academo.org/demos/spectrum-analyzer}}.
+           %\end{problem}
+           %%
+           %
+           %%\onecolumn
+           %%\input{./figs/fir}
+           %\begin{problem}
+           Upload the sound file that you downloaded in Problem \ref{prob:input} in the spectrogram  and play.  Observe the spectrogram. What do you find?
+           \\
+           %
+           \solution There are a lot of yellow lines between 440 Hz to 5.1 KHz.  These represent the synthesizer key tones. Also, the key strokes
+           are audible along with background noise.
+           % By observing spectrogram, it clearly shows that tonal frequency is under 4kHz. And above 4kHz only noise is present.
+     \item
+           \label{prob:output}
+           Write the python code for removal of out of band noise and execute the code.
+           \\
+           \solution
+           \lstinputlisting{./codes/Cancel_noise.py}
+           %\begin{figure}[h]
+           %\centering
+           %\includegraphics[width=\columnwidth]{enc_block_diag.png}
+           %\caption{}
+           %\label{fig:convolution encoder}
+           %\end{figure}
+           %\input{block_enc}
+     \item
+           The output of the python script in Problem \ref{prob:output} is the audio file Sound\_With\_ReducedNoise.wav. Play the file in the spectrogram in Problem \ref{prob:spectrogram}. What do you observe?
+           \\
+           \solution The key strokes as well as background noise is subdued in the audio.  Also,  the signal is blank for frequencies above 5.1 kHz.
 
 \end{enumerate}
 \section{Difference Equation}
 \begin{enumerate}[label=\thesection.\arabic*,ref=\thesection.\theenumi]
-\item Let
-\begin{equation}
-x(n) = \cbrak{\underset{\uparrow}{1},2,3,4,2,1}
-\end{equation}
-Sketch $x(n)$.
-\item Let
-\begin{multline}
-\label{eq:iir_filter}
-y(n) + \frac{1}{2}y(n-1) = x(n) + x(n-2), 
-\\
- y(n) = 0, n < 0
-\end{multline}
-Sketch $y(n)$.
-\\
-\solution The following code yields Fig. \ref{fig:xnyn}.
-\begin{lstlisting}
-wget https://github.com/gadepall/EE1310/raw/master/filter/codes/xnyn.py
+     \item Let
+           \begin{equation}
+                x(n) = \cbrak{\underset{\uparrow}{1},2,3,4,2,1}
+           \end{equation}
+           Sketch $x(n)$.
+           \solution Graph of x(n) has been plotted in part 1 of Fig. \ref{fig:xnyn}.
+     \item Let
+           \begin{multline}
+                \label{eq:iir_filter}
+                y(n) + \frac{1}{2}y(n-1) = x(n) + x(n-2),
+                \\
+                y(n) = 0, n < 0
+           \end{multline}
+           Sketch $y(n)$.
+           \\
+           \solution The following code yields Fig. \ref{fig:xnyn}.
+           \begin{lstlisting}
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/xnyn.py
 \end{lstlisting}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\columnwidth]{./figs/xnyn}
-\end{center}
-\captionof{figure}{}
-\label{fig:xnyn}	
-\end{figure}
-
+           \begin{figure}[!ht]
+                \begin{center}
+                     \includegraphics[width=\columnwidth]{./figs/xnyn}
+                \end{center}
+                \captionof{figure}{}
+                \label{fig:xnyn}
+           \end{figure}
+     \item Repeat the above exercise using a C code.
+           \solution The following code is in c and doing the same function as the above one is doing.
+           \begin{lstlisting}
+               c -code
+           \end{lstlisting}
 \end{enumerate}
 \section{$Z$-transform}
 \begin{enumerate}[label=\thesection.\arabic*]
-\item The $Z$-transform of $x(n)$ is defined as
-%
-\begin{equation}
-\label{eq:z_trans}
-X(z)={\mathcal {Z}}\{x(n)\}=\sum _{n=-\infty }^{\infty }x(n)z^{-n}
-\end{equation}
-%
-Show that
-\begin{equation}
-\label{eq:shift1}
-{\mathcal {Z}}\{x(n-1)\} = z^{-1}X(z)
-\end{equation}
-and find
-\begin{equation}
-	{\mathcal {Z}}\{x(n-k)\} 
-\end{equation}
-\solution From \eqref{eq:z_trans},
-\begin{align}
-{\mathcal {Z}}\{x(n-k)\} &=\sum _{n=-\infty }^{\infty }x(n-1)z^{-n}
-\\
-&=\sum _{n=-\infty }^{\infty }x(n)z^{-n-1} = z^{-1}\sum _{n=-\infty }^{\infty }x(n)z^{-n}
-\end{align}
-resulting in \eqref{eq:shift1}. Similarly, it can be shown that
-%
-\begin{equation}
-\label{eq:z_trans_shift}
-	{\mathcal {Z}}\{x(n-k)\} = z^{-k}X(z)
-\end{equation}
+     \item The $Z$-transform of $x(n)$ is defined as
+           %
+           \begin{equation}
+                \label{eq:z_trans}
+                X(z)={\mathcal {Z}}\{x(n)\}=\sum _{n=-\infty }^{\infty }x(n)z^{-n}
+           \end{equation}
+           %
+           Show that
+           \begin{equation}
+                \label{eq:shift1}
+                {\mathcal {Z}}\{x(n-1)\} = z^{-1}X(z)
+           \end{equation}
+           and find
+           \begin{equation}
+                {\mathcal {Z}}\{x(n-k)\}
+           \end{equation}
+           \solution Given that,
+           \begin{align}
+                X\brak{z} & = \mathcal{Z}\cbrak{x\brak{n}}               \\
+                          & = \sum_{n = -\infty}^{\infty}x\brak{n}z^{-n}
+           \end{align}
+           So,
+           \begin{align}
+                \mathcal{Z}\cbrak{x\brak{n-1}} & = \sum_{n=-\infty}^{\infty}x\brak{n-1}z^{-n}
+           \end{align}
+           let $n-1 = k$,
+           \begin{align}
+                 & = \sum_{k=-\infty}^{\infty}x\brak{k}z^{-\brak{k+1}} \\
+                 & = z^{-1}\sum_{k=-\infty}^{\infty}x\brak{k}z^{-k}    \\
+                 & = z^{-1}\sum_{n=-\infty}^{\infty}x\brak{n}z^{-n}    \\
+                 & = z^{-1}X\brak{z}
+           \end{align}
+           From \eqref{eq:z_trans},
+           \begin{align}
+                {\mathcal {Z}}\{x(n-k)\} & =\sum _{n=-\infty }^{\infty }x(n-1)z^{-n}
+                \\
+                                         & =\sum _{n=-\infty }^{\infty }x(n)z^{-n-1} = z^{-1}\sum _{n=-\infty }^{\infty }x(n)z^{-n}
+           \end{align}
+           \begin{equation}
+                \label{eq:z_trans_shift}
+                {\mathcal {Z}}\{x(n-k)\} = z^{-k}X(z)
+           \end{equation}
+           Hence proved.
+     \item Obtain X(z) for x(n) defined in problem 3.1.
+           \solution Given
+           \begin{equation}
+                x(n) = \cbrak{\underset{\uparrow}{1},2,3,4,2,1}
+           \end{equation}
+           and the $Z$-transform of $x(n)$ is defined as
+           \begin{align}
+                X(z)                       & = \sum _{n=-\infty }^{\infty }x(n)z^{-n}                 \\
+                \sum _{n=0 }^{5}x(n)z^{-n} & = z^{0} + 2z^{-1} + 3z^{-2} + 4z^{-3} + 2z^{-4} + z^{-5}
+           \end{align}
 
-\item Find
-%
-\begin{equation}
-H(z) = \frac{Y(z)}{X(z)}
-\end{equation}
-%
-from  \eqref{eq:iir_filter} assuming that the $Z$-transform is a linear operation.
-\\
-\solution  Applying \eqref{eq:z_trans_shift} in \eqref{eq:iir_filter},
-\begin{align}
-Y(z) + \frac{1}{2}z^{-1}Y(z) &= X(z)+z^{-2}X(z)
-\\
-\implies \frac{Y(z)}{X(z)} &= \frac{1 + z^{-2}}{1 + \frac{1}{2}z^{-1}}
-\label{eq:freq_resp}
-\end{align}
-%
-\item Find the Z transform of 
-\begin{equation}
-\delta(n)
-=
-\begin{cases}
-1 & n = 0
-\\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-and show that the $Z$-transform of
-\begin{equation}
-\label{eq:unit_step}
-u(n)
-=
-\begin{cases}
-1 & n \ge 0
-\\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-is
-\begin{equation}
-U(z) = \frac{1}{1-z^{-1}}, \quad \abs{z} > 1
-\end{equation}
-\solution It is easy to show that
-\begin{equation}
-\delta(n) \ztrans 1
-\end{equation}
-and from \eqref{eq:unit_step},
-\begin{align}
-U(z) &= \sum _{n= 0}^{\infty}z^{-n}
-\\
-&=\frac{1}{1-z^{-1}}, \quad \abs{z} > 1
-\end{align}
-using the fomula for the sum of an infinite geometric progression.
-%
-\item Show that 
-\begin{equation}
-\label{eq:anun}
-a^nu(n) \ztrans \frac{1}{1-az^{-1}} \quad \abs{z} > \abs{a}
-\end{equation}
-%
-\item 
-Let
-\begin{equation}
-H\brak{e^{\j \omega}} = H\brak{z = e^{\j \omega}}.
-\end{equation}
-Plot $\abs{H\brak{e^{\j \omega}}}$.  Comment.  $H(e^{\j \omega})$ is
-known as the {\em Discret Time Fourier Transform} (DTFT) of $x(n)$.
-\\
-\solution The following code plots Fig. \ref{fig:dtft}.
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/dtft.py
+     \item Find
+           %
+           \begin{equation}
+                \label{eq:dtft_1}
+                H(z) = \frac{Y(z)}{X(z)}
+           \end{equation}
+           %
+           from  $\eqref{eq:iir_filter}$ assuming that the $Z$-transform is a linear operation.
+           \\
+           \solution since $Z$-transform is a linear operator therefore \\
+           y(z) = Y(z) and x(z) = X(z) \\
+           So, \\
+           on applying \eqref{eq:z_trans_shift} in \eqref{eq:iir_filter},
+           we get
+           \begin{align}
+                Y(z) + \frac{1}{2}z^{-1}Y(z) & = X(z)+z^{-2}X(z)
+                \\
+                \implies \frac{Y(z)}{X(z)}   & = \frac{1 + z^{-2}}{1 + \frac{1}{2}z^{-1}}
+                \label{eq:freq_resp}
+           \end{align}
+
+     \item Find the Z transform of
+           \begin{equation}
+                \delta(n)
+                =
+                \begin{cases}
+                     1 & n = 0
+                     \\
+                     0 & \text{otherwise}
+                \end{cases}
+           \end{equation}
+           and show that the $Z$-transform of
+           \begin{equation}
+                \label{eq:unit_step}
+                u(n)
+                =
+                \begin{cases}
+                     1 & n \ge 0
+                     \\
+                     0 & \text{otherwise}
+                \end{cases}
+           \end{equation}
+           is
+           \begin{equation}
+                U(z) = \frac{1}{1-z^{-1}}, \quad \abs{z} > 1
+           \end{equation}
+           \solution
+           The $Z$-transform of $\delta{n}$ is,
+           \begin{align}
+                \mathcal{Z}\cbrak{\delta{n}} & = \sum_{n=-\infty}^{\infty}\delta\brak{n}z^{-n} \\
+                                             & = \delta\brak{0}z^{0}                           \\
+                                             & = 1
+           \end{align}
+           and the $Z$-transform of unit-step function $u\brak{n}$ is,
+           \begin{align}
+                U\brak{n} & = \sum_{n=-\infty}^{\infty}u\brak{n}z^{-n} \\
+                          & = 0 + \sum_{n = 0}^{\infty}1.z^{-n}        \\
+                          & = 1 + z^{-1} + z^{-2} + .\,.\,.
+           \end{align}
+           and from \eqref{eq:unit_step},
+           \begin{align}
+                U(z) & = \sum _{n= 0}^{\infty}z^{-n}
+                \\
+                     & =\frac{1}{1-z^{-1}}, \quad \abs{z} > 1
+           \end{align}
+           using the fomula for the sum of an infinite geometric progression.
+           %
+     \item Show that
+           \begin{equation}
+                \label{eq:anun}
+                a^nu(n) \ztrans \frac{1}{1-az^{-1}} \quad \abs{z} > \abs{a}
+           \end{equation}
+           \solution
+           The $Z$- transform will be
+           \begin{align}
+                \mathcal{Z}\cbrak{a^nu\brak{n}} & = \sum_{n = 0}^{\infty}a^{n}z^{-n}                    \\
+                                                & = 1 + \frac{a}{z} + \brak{\frac{a}{z}}^2 + .\,.\,.\,.
+           \end{align}
+           Above is a infinite geometric series with first term $1$ and common ratio as $\frac{a}{z}$ and it can
+           be written as,
+           \begin{align}
+                \mathcal{Z}\cbrak{a^nu\brak{n}} & = \frac{1}{1 - \frac{a}{z}} \because \abs{a} < \abs{z}
+           \end{align}
+           Therefore,
+           \begin{equation}
+                a^nu(n) \ztrans \frac{1}{1-az^{-1}} \quad \abs{z} > \abs{a}
+           \end{equation}
+           %
+     \item
+           Let
+           \begin{equation}
+                H\brak{e^{\j \omega}} = H\brak{z = e^{\j \omega}}.
+           \end{equation}
+           Plot $\abs{H\brak{e^{\j \omega}}}$.  Comment.  $H(e^{\j \omega})$ is
+           known as the {\em Discret Time Fourier Transform} (DTFT) of $x(n)$.
+           \\
+           \solution The following code plots Fig. \ref{fig:dtft}.
+           \begin{lstlisting}
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/dtft.py
 \end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{./figs/dtft}
-\caption{$\abs{H\brak{e^{\j\omega}}}$}
-\label{fig:dtft}
-\end{figure}
+           \begin{figure}[!ht]
+                \centering
+                \includegraphics[width=\columnwidth]{./figs/dtft}
+                \caption{$\abs{H\brak{e^{\j\omega}}}$}
+                \label{fig:dtft}
+           \end{figure}
+     \item Express x(n) in terms of $H\brak{e^{\j\omega}}$ \\
+           \solution Using \eqref{eq:freq_resp} and \eqref{eq:dtft_1} 
+           \begin{align}
+                H\brak{e^{j \omega}}                  & = \frac{1+e^{-2j\omega}}{1 + \frac{e^{-j\omega}}{2}}                                                                              \\
+                \implies \abs{H\brak{e^{j \omega}}}   & = \frac{\abs{1+e^{-2j\omega}}}{\abs{1 + \frac{e^{-j\omega}}{2}}}                                                                  \\
+                                                      & = \frac{\abs{1+e^{2j\omega}}}{\abs{e^{2j\omega} + \frac{e^{j\omega}}{2}}}                                                         \\
+                                                      & = \frac{\abs{1+e^{2j\omega}}}{{\abs{e^{j\omega}}}\abs{e^{j\omega} + \frac{1}{2}}}                                                 
+           \end{align}
+           And we know that $\abs{e^{j\omega}} = 1$
+           \begin{align}                                           
+                                                      & = \frac{\abs{1+\cos2\omega + j\sin2\omega}}{\abs{e^{j\omega}+ \frac{1}{2}}}                                                       \\
+                                                      & = \frac{\abs{4\cos^2\brak{\omega} + 4j\sin\brak{\omega}\cos\brak{\omega}}}{\abs{2e^{j\omega} + 1}}                                \\
+                                                      & = \frac{\abs{4\cos\brak{\omega}}\abs{\cos\brak{\omega} + j\sin\brak{\omega}}}{\abs{2\cos\brak{\omega} + 1 + 2j\sin\brak{\omega}}} \\
+                \therefore \abs{H\brak{e^{j \omega}}} & = \frac{\abs{4\cos\brak{\omega}}}{\sqrt{5 +4\cos\brak{\omega}}}
+           \end{align}
 \end{enumerate}
 
 \end{document}
