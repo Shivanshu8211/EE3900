@@ -218,7 +218,7 @@ columns=fullflexible
 % column for its text to clear the IEEEpubid mark.
 
 
-
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 % make the title area
 \maketitle
 
@@ -299,7 +299,7 @@ wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/Sound_Noise.wav
            \begin{equation}
                 x(n) = \cbrak{\underset{\uparrow}{1},2,3,4,2,1}
            \end{equation}
-           Sketch $x(n)$.
+           Sketch $x(n)$. \\
            \solution Graph of x(n) has been plotted in part 1 of Fig. \ref{fig:xnyn}.
      \item Let
            \begin{multline}
@@ -324,7 +324,7 @@ wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/xnyn.py
      \item Repeat the above exercise using a C code.
            \solution The following code is in c and doing the same function as the above one is doing.
            \begin{lstlisting}
-               c -code
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/xnyn.c
            \end{lstlisting}
 \end{enumerate}
 \section{$Z$-transform}
@@ -474,36 +474,345 @@ wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/xnyn.py
      \item
            Let
            \begin{equation}
-                H\brak{e^{\j \omega}} = H\brak{z = e^{\j \omega}}.
+                H\brak{e^{j \omega}} = H\brak{z = e^{j \omega}}.
            \end{equation}
-           Plot $\abs{H\brak{e^{\j \omega}}}$.  Comment.  $H(e^{\j \omega})$ is
-           known as the {\em Discret Time Fourier Transform} (DTFT) of $x(n)$.
-           \\
-           \solution The following code plots Fig. \ref{fig:dtft}.
+           Plot $\abs{H\brak{e^{j \omega}}}$.  Comment.  $H(e^{j \omega})$ is known as the {\em Discret Time Fourier Transform} (DTFT) of $h(n)$.\\
+           \solution
+           Download the code for the plot $\ref{DTFT}$ from the link below
            \begin{lstlisting}
-wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/dtft.py
-\end{lstlisting}
+               wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/dtft.py
+               \end{lstlisting}
            \begin{figure}[!ht]
                 \centering
                 \includegraphics[width=\columnwidth]{./figs/dtft}
                 \caption{$\abs{H\brak{e^{\j\omega}}}$}
                 \label{fig:dtft}
            \end{figure}
-     \item Express x(n) in terms of $H\brak{e^{\j\omega}}$ \\
-           \solution Using \eqref{eq:freq_resp} and \eqref{eq:dtft_1} 
+           Now using $\eqref{eq:freq_resp}$, we will find $\abs{H\brak{e^{j \omega}}}$,
            \begin{align}
                 H\brak{e^{j \omega}}                  & = \frac{1+e^{-2j\omega}}{1 + \frac{e^{-j\omega}}{2}}                                                                              \\
                 \implies \abs{H\brak{e^{j \omega}}}   & = \frac{\abs{1+e^{-2j\omega}}}{\abs{1 + \frac{e^{-j\omega}}{2}}}                                                                  \\
                                                       & = \frac{\abs{1+e^{2j\omega}}}{\abs{e^{2j\omega} + \frac{e^{j\omega}}{2}}}                                                         \\
-                                                      & = \frac{\abs{1+e^{2j\omega}}}{{\abs{e^{j\omega}}}\abs{e^{j\omega} + \frac{1}{2}}}                                                 
-           \end{align}
-           And we know that $\abs{e^{j\omega}} = 1$
-           \begin{align}                                           
                                                       & = \frac{\abs{1+\cos2\omega + j\sin2\omega}}{\abs{e^{j\omega}+ \frac{1}{2}}}                                                       \\
                                                       & = \frac{\abs{4\cos^2\brak{\omega} + 4j\sin\brak{\omega}\cos\brak{\omega}}}{\abs{2e^{j\omega} + 1}}                                \\
                                                       & = \frac{\abs{4\cos\brak{\omega}}\abs{\cos\brak{\omega} + j\sin\brak{\omega}}}{\abs{2\cos\brak{\omega} + 1 + 2j\sin\brak{\omega}}} \\
                 \therefore \abs{H\brak{e^{j \omega}}} & = \frac{\abs{4\cos\brak{\omega}}}{\sqrt{5 +4\cos\brak{\omega}}}
            \end{align}
+           Since $\abs{H(e^{j\omega})}$ is function of cosine we can say it is periodic.And from the plot $\ref{DTFT}$ we can say that it is symmetric about $\omega = 0\brak{\text{even function}}$ and it is periodic with period $2\pi$.You can find the same from the theoritical expression $\abs{H\brak{e^{j \omega}}}$,
+           \begin{align}
+                H(e^{j\omega}) & = H(e^{j(-\omega)})\brak{\text{cos is an even function}}
+           \end{align}
+           And to find period, the period of $\abs{\cos(\omega)}$ is $\pi$ and the period of $\sqrt{5 + 4\cos\brak{\omega}}$ is $2\pi$. So the period of division of both will be,
+           \begin{align}
+                lcm\brak{\pi,2\pi} & = 2\pi
+           \end{align}
+           This gives us the period of $\abs{H(e^{j\omega})}$ as $2\pi$
+
+     \item Express $h(n)$ in terms of $H\brak{e^{j \omega}}$.\\
+           \solution We know that
+           \begin{align}
+                H(e^{j\omega})=\sum_{k=-\infty}^\infty h(k)e^{-j\omega k}
+           \end{align}
+           and
+           \begin{align}
+                h(n)=\frac{1}{2\pi}\int_{-\pi}^\pi H(e^{j\omega})e^{j\omega n}d\omega
+           \end{align}
+           Now,
+           \begin{align}
+                \frac{1}{2\pi}\int_{-\pi}^\pi & H(e^{j\omega})e^{j\omega n}d\omega                                                                                           \\
+                                              & =\frac{1}{2\pi}\int_{-\pi}^\pi \sum_{k=-\infty}^\infty h(k)e^{-j\omega k}e^{j\omega n}d\omega                                \\
+                                              & =\frac{1}{2\pi} \sum_{k=-\infty}^\infty h(k)\int_{-\pi}^\pi e^{j\omega (n-k)}d\omega                                         \\
+                                              & =\frac{1}{2\pi}\cbrak{ \sum_{k\neq n} h(k)\frac{e^{j\omega (n-k)}}{j(n-k)}\Biggr] _{-\pi}^\pi 	+h(n)\int_{-\pi}^\pi d\omega } \\
+                % &=\frac{1}{2\pi}\sum_{k\neq n} h(k)\frac{e^{j\omega (n-k)}}{j(n-k)}\Biggr] _{-\pi}^\pi \\
+                % &	+\frac{1}{2\pi}h(n)\int_{-\pi}^\pi d\omega \\
+                                              & =\frac{0+2\pi h(n)}{2\pi}                                                                                                    \\
+                                              & =h(n)
+           \end{align}
+
+\end{enumerate}
+\section{Impulse Response}
+\begin{enumerate}[label=\thesection.\arabic*]
+     \item Using long division,
+           find
+           \begin{align}
+                h(n), \quad n < 5
+           \end{align}
+           for H(z) in
+           $\eqref{eq:freq_resp}$.\\
+           \solution From $\eqref{eq:freq_resp}$, we can write
+           \begin{align}
+                H\brak{z} & = \frac{1 + z^{-2}}{1 + \frac{z^{-1}}{2}}
+           \end{align}
+           $$
+                \begin{array}{llllll}
+                                    & 2z^{-1} & -4                   \\\cline{2-5}
+                     1 + z^{-1}/2 | & 1       & +z^{-2}              \\
+                                    & 2z^{-1} & +z^{-2}              \\\cline{2-5}
+                                    &         & 1       & -2z^{-1}   \\
+                                    &         & -4      & -2z^{-1} & \\\cline{3-5}
+                                    &         &         & -5         \\
+                \end{array}
+           $$
+           So we can replace $\eqref{eq:freq_resp}$ as,
+           \begin{align}
+                \frac{1+z^{-2}}{1 + \frac{z^{-1}}{2}} & = 2z^{-1} - 4 + \frac{5}{1 + z^{-1}/2}\label{eq:longdiv}
+           \end{align}
+           Now we can expand the second term of above expression as an infinite geometric series,
+           \begin{align}
+                \frac{5}{1+z^{-1}/2} &= 5\brak{1 + \brak{\frac{-1}{2z}} + \brak{\frac{-1}{2z}}^2 + .\,.\,.} \end{align}
+           where we assume $\abs{\frac{1}{2z}} < 1$.
+           So $\eqref{eq:longdiv}$ will become,
+           \begin{align}
+                 & = 2z^{-1} - 4 + 5 + \frac{-5}{2}z^{-1} + \frac{5}{4}z^{-2} + \frac{-5}{8}z^{-3} + \frac{5}{16}z^{-4} + \,.\,.              \\
+                 & = 1z^{0} + \frac{-1}{2}z^{-1} +\frac{5}{4}z^{-2} + \frac{-5}{8}z^{-3} +\frac{5}{16}z^{-4} + \,.\,.  \label{eq:longdiv_exp}
+           \end{align}
+           Now to get $h(n)$ for $n <5$ we will compare $\eqref{eq:longdiv_exp}$ with the below equation,
+           \begin{align}
+                H\brak{z} & = \sum_{n = -\infty}^{n = \infty}h(n)z^{-n}
+           \end{align}
+           $h(n)$ will be the coefficient of $z^{-n}$.\\
+           Using this, from $\eqref{eq:longdiv_exp}$ we can write,
+           \begin{align}
+                h(0) & = 1            \\
+                h(1) & = \frac{-1}{2} \\
+                h(2) & = \frac{5}{4}  \\
+                h(3) & = \frac{-5}{8} \\
+                h(4) & = \frac{5}{16}
+           \end{align}
+           And for $n<0\,\, h(n) = 0$.
+     \item \label{prob:impulse_resp}
+           Find an expression for $h(n)$ using $H(z)$, given that
+           \begin{equation}
+                \label{eq:impulse_resp}
+                h(n) \ztrans H(z)
+           \end{equation}
+           and there is a one to one relationship between $h(n)$ and $H(z)$. $h(n)$ is known as the {\em impulse response} of the system defined by $\eqref{eq:iir_filter}$.\\
+           \solution The $H\brak{z}$ can be written as,
+           \begin{align}
+                H\brak{z} & = \frac{1}{1 + \frac{z^{-1}}{2}} + \frac{z^{-2}}{1+\frac{z^{-1}}{2}}
+           \end{align}
+           From $\eqref{eq:anun}$ we can write it as,
+           \begin{align}
+                h\brak{n} & = \brak{\frac{-1}{2}}^{n} u\brak{n} + \brak{\frac{-1}{2}}^{n-2} u\brak{n-2}\label{eq:hn}
+           \end{align}
+     \item Sketch $h(n)$. Is it bounded? Justify Theoritically.\\
+           \solution  Download the code for the plot $\ref{hn}$ from the below link,
+           \begin{lstlisting}
+wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hn.py
+\end{lstlisting}
+           \begin{figure}[ht!]
+                \centering
+                \includegraphics[width = \columnwidth]{figs/hn.png}
+                \caption{$h\brak{n}$ as inverse of $H\brak{n}$}
+                \label{hn}
+           \end{figure}
+           From the plot it seems like $h(n)$ is bounded and becomes smaller in magnitude as $n$ increases.\\
+           Using $\eqref{eq:hn}$, we can get theoritical expression as,
+           \begin{align}
+                h\brak{n} & = \begin{cases}
+                                   0                      & , n < 0     \\
+                                   \brak{\frac{-1}{2}}^n  & , 0\leq n<2 \\
+                                   5\brak{\frac{-1}{2}}^n & , n \geq 2
+                              \end{cases}\label{eq:hn_theo}
+           \end{align}
+           A sequence $\cbrak{x_n}$ is said to be bounded if and only if there exist a positive real number $M$ such that,
+           \begin{align}
+                \abs{x_n} \leq M , \forall n \in \mathcal{N}\label{def:bounded}
+           \end{align}
+           So to say $h\brak{n}$ is bounded we should able to find the $M$ which satisfies $\eqref{def:bounded}$.\\
+           For n < 0,
+           \begin{align}
+                \abs{h\brak{n}} \leq 0
+           \end{align}
+           For $0 \leq n <2$,
+           \begin{align}
+                \abs{h\brak{n}} & = \abs{\frac{-1}{2}}^{n}        \\
+                                & = \brak{\frac{1}{2}}^{n} \leq 1
+           \end{align}
+           And for $n \geq 2$,
+           \begin{align}
+                \abs{h\brak{n}} & = \abs{5\brak{\frac{-1}{2}}}^{n}          \\
+                                & = \brak{\frac{5}{2}}^{n} \leq \frac{5}{4}
+           \end{align}
+           From above three cases, we can get $M$ as,
+           \begin{align}
+                M & = max\cbrak{0,1,\frac{5}{4}} \\
+                  & = \frac{5}{4}
+           \end{align}
+           Therefore, $h\brak{n}$ is bounded using $\eqref{def:bounded}$ with $M = \frac{5}{4}$ i.e.,
+           \begin{align}
+                \abs{h(n)} \leq \frac{5}{4}  \forall n \in \mathcal{N}
+           \end{align}
+     \item Convergent? Justify using the ratio test.\\
+           \solution We can say a given real sequence $\cbrak{x_n}$ is convergent if
+           \begin{align}
+                \lim_{n \rightarrow \infty}\abs{\frac{x_{n+1}}{x_n}} < 1
+           \end{align}
+           This is known as Ratio test.\\
+           In this case the limit will become,
+           \begin{align}
+                \lim_{n \rightarrow \infty}\abs{\frac{h\brak{n+1}}{h\brak{n}}} & = \lim_{n \rightarrow \infty}\abs{\frac{5\brak{\frac{-1}{2}}^{n+1}}{5\brak{\frac{-1}{2}}^{n}}} \\
+                                                                               & = \lim_{n \rightarrow \infty}\abs{\frac{-1}{2}}                                                \\
+                                                                               & = \frac{1}{2}
+           \end{align}
+           As $\frac{1}{2} < 1$, from root test we can say that $h\brak{n}$ is convergent.
+     \item The system with $h(n)$ is defined to be stable if
+           \begin{equation}
+                \sum_{n=-\infty}^{\infty}h(n) < \infty
+           \end{equation}
+           Is the system defined by $\eqref{eq:iir_filter}$ stable for the impulse response in $\eqref{eq:impulse_resp}$?\\
+           \solution From $\eqref{eq:hn}$,
+           \begin{align}
+                \sum_{n=-\infty}^{\infty}h\brak{n} & = \sum_{n=-\infty}^{\infty}\brak{\brak{\frac{-1}{2}}^{n} u\brak{n} + \brak{\frac{-1}{2}}^{n-2} u\brak{n-2}} \\
+                                                   & = 2\brak{\frac{1}{1+\frac{1}{2}}}                                                                           \\
+                                                   & = \frac{4}{3}
+           \end{align}
+           $\therefore$ the system is stable.
+     \item Verify the above result using a python code.\\
+           \solution Download the python code from the below link
+           \begin{lstlisting}
+wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hn_stable.py
+\end{lstlisting}
+           Then run the following command,
+           \begin{lstlisting}
+python3 hn_stable.py
+\end{lstlisting}
+     \item Compute and sketch $h(n)$ using
+           \begin{equation}
+                \label{eq:iir_filter_h}
+                h(n) + \frac{1}{2}h(n-1) = \delta(n) + \delta(n-2),
+           \end{equation}
+           This is the definition of $h(n)$.\\
+           \solution Download the code for the plot \ref{hndef} from the below link,
+           \begin{lstlisting}
+wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hndef.py
+\end{lstlisting}
+           Note that this is same as $\ref{hn}$.\\
+           \begin{figure}[ht!]
+                \centering
+                \includegraphics[width = \columnwidth]{figs/hndef.png}
+                \caption{From the definition of $h(n)$}
+                \label{hndef}
+           \end{figure}
+           For $n <0$, $h\brak{n} = 0$ and,
+           \begin{align}
+                h\brak{0} & = \delta\brak{0} \\
+                          & = 1
+           \end{align}
+           For $n =1$,
+           \begin{align}
+                h\brak{1} + \frac{1}{2}h\brak{0} & = \delta\brak{1} + \delta\brak{-1} \\
+                \implies  h\brak{1}              & = -\frac{1}{2}h\brak{0}            \\
+                                                 & = -\frac{1}{2}
+           \end{align}
+           $n=2$,
+           \begin{align}
+                h\brak{2} + \frac{1}{2}h\brak{1} & = 0 + \delta\brak{0} \\
+                h\brak{2}                        & = 1 + \frac{1}{4}    \\
+                                                 & = \frac{5}{4}
+           \end{align}
+           And for $n>2$ RHS will be $0$ so,
+           \begin{align}
+                h\brak{n} & = -\frac{1}{2}h\brak{n-1}
+           \end{align}
+           Overall
+           \begin{align}
+                h\brak{n} & = \begin{cases}
+                                   0                       & , n <0  \\
+                                   1                       & , n = 0 \\
+                                   -\frac{1}{2}            & , n=1   \\
+                                   \frac{5}{4}             & , n =2  \\
+                                   -\frac{1}{2}h\brak{n-1} & , n >2
+                              \end{cases}
+           \end{align}
+     \item Compute
+           %
+           \begin{equation}
+                \label{eq:convolution}
+                y(n) = x(n)*h(n) = \sum_{k=-\infty}^{\infty}x(k)h(n-k)
+           \end{equation}
+           %
+           Comment. The operation in $\eqref{eq:convolution}$ is known as
+                {\em convolution}.\\
+           %
+           \solution Download the code for plot $\ref{ynconv}$ from the below link
+           \begin{lstlisting}
+      wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/ynconv.py
+            \end{lstlisting}
+           Note that the plot is same that as in $\ref{fig:xnyn}$.
+           \begin{figure}[ht!]
+                \centering
+                \includegraphics[width = \columnwidth]{figs/ynconv.png}
+                \caption{$y(n)$ using the convolution definition}
+                \label{ynconv}
+           \end{figure}
+     \item Express the above convolution using a Teoplitz matrix.
+           \solution
+           For finding the above convolution using topleitz matrix we have to find topleitz matrix of h(n).
+           h(n) is tending to 0 for large n.
+           So,we take upto some n only.
+           So,
+           \begin{align}
+                h(n)=\myvec{1 \\-.5\\.\\.} \quad for \quad n=0,2 ...9
+           \end{align}
+           So,topleitz matrix of $h(n)$ will be
+           \begin{align}
+                top\{h(n)\}=\myvec{1 & 0 & 0 & 0 & 0 & 0 \\-.5 &1 &0 &0 &0 &0\\1.25&-.5&1&0&0&0\\. &.& .& .& .&. }
+           \end{align}
+           and
+           \begin{align}
+                x(n)=\myvec{1 \\2\\3\\4\\2\\1}
+           \end{align}
+           So,
+           \begin{align}
+                x(n)*h(n) & =top\{h(n)\}x(n) \\
+                          & =\myvec{1        \\1.5\\3.25\\.\\.}
+           \end{align}
+     \item Show that
+           \begin{equation}
+                y(n) =  \sum_{k=-\infty}^{\infty}x(n-k)h(k)
+           \end{equation}
+           \solution Substitute $k := n-k$ in $\eqref{eq:convolution}$, we will get
+           \begin{align}
+                y(n) & = \sum_{k=-\infty}^{\infty}x(k)h(n-k)     \\
+                     & = \sum_{n - k=-\infty}^{\infty}x(n-k)h(k) \\
+                     & = \sum_{k = -\infty}^{\infty}x(n-k)h(k)
+           \end{align}
+
+\end{enumerate}
+\section{DFT and FFT}
+\begin{enumerate}[label=\thesection.\arabic*]
+     \item
+           Compute
+           \begin{equation}
+                X(k) \define \sum _{n=0}^{N-1}x(n) e^{-\j2\pi kn/N}, \quad k = 0,1,\dots, N-1
+           \end{equation}
+           and $H(k)$ using $h(n)$.
+     \item Compute
+           \begin{equation}
+                Y(k) = X(k)H(k)
+           \end{equation}
+     \item Compute
+           \begin{equation}
+                y\brak{n}={\frac {1}{N}}\sum _{k=0}^{N-1}Y\brak{k}\cdot e^{\j 2\pi kn/N},\quad n = 0,1,\dots, N-1
+           \end{equation}
+           \\
+           \solution The following code plots Fig. \ref{fig:ynconv}. Note that this is the same as
+           $y(n)$ in  Fig.
+           \ref{fig:xnyn}.
+           %
+           \begin{lstlisting}
+wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.py
+\end{lstlisting}
+           % \begin{figure}[!ht]
+           % \centering
+           % \includegraphics[width=\columnwidth]{./figs/yndft}
+           % \caption{$y(n)$ from the DFT}
+           % \label{fig:yndft}
+           % \end{figure}
+     \item Repeat the previous exercise by computing $X(k), H(k)$ and $y(n)$ through FFT and
+           IFFT.
+     \item Wherever possible, express all the above equations as matrix equations.
 \end{enumerate}
 
 \end{document}

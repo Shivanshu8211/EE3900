@@ -1,5 +1,6 @@
 #include <stdio.h>
 int main(){
+    FILE* fp;
     int x[] = {1,2,3,4,2,1};
     int k = 15;
     float y[15];
@@ -17,7 +18,10 @@ int main(){
 	else{
 		y[n] = -0.5*y[n-1];}
     }
-    for(int i = 0; i<15; i++){
-        printf("%f ",y[i]);
+    
+    fp = fopen("xnyn.dat","w");
+    for(int i=0;i<15;i++){
+        fprintf(fp,"%f\n",y[i]);
     }
+    fclose(fp);
 }

@@ -8,7 +8,7 @@ def H(z):
 	return H
 		
 
-omega = np.linspace(-3*np.pi,3*np.pi,1e2)
+omega = np.linspace(int(-3*np.pi),int(3*np.pi),int(1e2))
 
 plt.plot(omega, abs(H(np.exp(1j*omega))))
 plt.title('Filter Frequency Response')
