@@ -43,7 +43,10 @@
 
 %\usepackage{stmaryrd}
 
-
+\usepackage{draftwatermark}
+\SetWatermarkLightness{ 0.85 }
+\SetWatermarkText{EE3900}
+\SetWatermarkScale{1}
 %\usepackage{wasysym}
 %\newcounter{MYtempeqncnt}
 \DeclareMathOperator*{\Res}{Res}
@@ -217,7 +220,7 @@ columns=fullflexible
 % Remember, if you use this you must call \IEEEpubidadjcol in the second
 % column for its text to clear the IEEEpubid mark.
 
-
+\pagecolor{cyan!20!white}
 \newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 % make the title area
 \maketitle
@@ -598,7 +601,7 @@ wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/xnyn.c
      \item Sketch $h(n)$. Is it bounded? Justify Theoritically.\\
            \solution  Download the code for the plot $\ref{hn}$ from the below link,
            \begin{lstlisting}
-wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hn.py
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/hn.py
 \end{lstlisting}
            \begin{figure}[ht!]
                 \centering
@@ -671,7 +674,7 @@ wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/As
      \item Verify the above result using a python code.\\
            \solution Download the python code from the below link
            \begin{lstlisting}
-wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hn_stable.py
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/hn_stable.py
 \end{lstlisting}
            Then run the following command,
            \begin{lstlisting}
@@ -685,7 +688,7 @@ python3 hn_stable.py
            This is the definition of $h(n)$.\\
            \solution Download the code for the plot \ref{hndef} from the below link,
            \begin{lstlisting}
-wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/hndef.py
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/hndef.py
 \end{lstlisting}
            Note that this is same as $\ref{hn}$.\\
            \begin{figure}[ht!]
@@ -737,7 +740,7 @@ wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/As
            %
            \solution Download the code for plot $\ref{ynconv}$ from the below link
            \begin{lstlisting}
-      wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/Assignment-1/Codes/ynconv.py
+wget https://github.com/Shivanshu8211/EE3900/blob/master/codes/ynconv.py
             \end{lstlisting}
            Note that the plot is same that as in $\ref{fig:xnyn}$.
            \begin{figure}[ht!]
@@ -746,7 +749,7 @@ wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/As
                 \caption{$y(n)$ using the convolution definition}
                 \label{ynconv}
            \end{figure}
-     \item Express the above convolution using a Teoplitz matrix.
+     \item Express the above convolution using a Teoplitz matrix.\\
            \solution
            For finding the above convolution using topleitz matrix we have to find topleitz matrix of h(n).
            h(n) is tending to 0 for large n.
@@ -768,7 +771,7 @@ wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/As
                 x(n)*h(n) & =top\{h(n)\}x(n) \\
                           & =\myvec{1        \\1.5\\3.25\\.\\.}
            \end{align}
-     \item Show that
+     \item Show that\\
            \begin{equation}
                 y(n) =  \sum_{k=-\infty}^{\infty}x(n-k)h(k)
            \end{equation}
@@ -787,32 +790,73 @@ wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/main/As
            \begin{equation}
                 X(k) \define \sum _{n=0}^{N-1}x(n) e^{-\j2\pi kn/N}, \quad k = 0,1,\dots, N-1
            \end{equation}
-           and $H(k)$ using $h(n)$.
+           and $H(k)$ using $h(n)$.\\
+           \solution Download the below python code for the plot $\ref{DFT}$,
+           \begin{lstlisting}
+wget  https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/master/Sound%201/Codes/dft.py
+\end{lstlisting}
+           And run the following command in the terminal,
+           \begin{lstlisting}
+python3 dft.py
+\end{lstlisting}
+           \begin{figure}[!h]
+                \includegraphics[width = \columnwidth]{figs/dft.png}
+                \centering
+                \caption{Plot of real part of Discrete Fourier Transforms of $x(n)$ and $h(n)$}
+                \label{DFT}
+           \end{figure}
      \item Compute
            \begin{equation}
                 Y(k) = X(k)H(k)
            \end{equation}
+           \solution Download the below python code for the plot $\ref{Y_k}$,
+           \begin{lstlisting}
+wget  https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/master/Sound%201/Codes/Y_K.py
+  \end{lstlisting}
+           Then run the following command in the terminal,
+           \begin{lstlisting}
+python3 Y_K.py
+ \end{lstlisting}
+           \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\columnwidth]{figs/Y_k.png}
+                \caption{$Y(k)$ as the product of $X(k)$ and $H(k)$}
+                \label{Y_k}
+           \end{figure}
      \item Compute
            \begin{equation}
                 y\brak{n}={\frac {1}{N}}\sum _{k=0}^{N-1}Y\brak{k}\cdot e^{\j 2\pi kn/N},\quad n = 0,1,\dots, N-1
            \end{equation}
-           \\
-           \solution The following code plots Fig. \ref{fig:ynconv}. Note that this is the same as
-           $y(n)$ in  Fig.
-           \ref{fig:xnyn}.
-           %
+           \solution Download the below python code for the plot $\ref{yndft_dif}$,
            \begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.py
+wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/master/Sound%201/Codes/yndft_dif.py
 \end{lstlisting}
-           % \begin{figure}[!ht]
-           % \centering
-           % \includegraphics[width=\columnwidth]{./figs/yndft}
-           % \caption{$y(n)$ from the DFT}
-           % \label{fig:yndft}
-           % \end{figure}
+           Then run the following command,
+           \begin{lstlisting}
+python3 yndft_dif.py
+ \end{lstlisting}
+           \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\columnwidth]{figs/yndft_dif.png}
+                \caption{$y(n)$ using IDFT and difference equation}
+                \label{yndft_dif}
+           \end{figure}
      \item Repeat the previous exercise by computing $X(k), H(k)$ and $y(n)$ through FFT and
-           IFFT.
-     \item Wherever possible, express all the above equations as matrix equations.
+           IFFT.\\
+           \solution Download the below python code for the plot $\ref{yn_ifft}$,
+           \begin{lstlisting}
+wget https://github.com/Charanyash/EE3900-Digital_Signal_Processing/blob/master/Sound%201/Codes/yn_ifft.py
+  \end{lstlisting}
+           Then run the following command
+           \begin{lstlisting}
+python3 yn_ifft.py
+   \end{lstlisting}
+           \begin{figure}[!ht]
+                \includegraphics[width=\columnwidth]{figs/yn_ifft.png}
+                \centering
+                \caption{The plot of $y\brak{n}$ using IFFT}
+                \label{yn_ifft}
+           \end{figure}
 \end{enumerate}
 
 \end{document}
