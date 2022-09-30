@@ -9,10 +9,11 @@ for i in range(N):
     F_N[i][k]=np.exp(-1j*2*np.pi*i*k/N)
     if i!=k:
       F_N[k][i]=F_N[i][k]
-print(F_N)
+#print(F_N)
 
 x=np.array([[1],[2],[3],[4],[2],[1]])
 
 X=np.dot(F_N,x)
+X =np.array2string(X,suppress_small ='True')
 
 print(X)
