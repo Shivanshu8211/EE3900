@@ -1,0 +1,41 @@
+\documentclass[12pt]{IEEEtran}
+fgdghfdg
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+
+\title{\textbf{Assignment-1}\\ \large EE3900: Digital Signal Processing\\ IIT Hyderabad}
+\author{Shivanshu  Ai21btech11027\\ August 30,2022}
+
+\begin{document}
+    \maketitle
+    \textbf{Q3(c)\hspace{1mm} Find the z - transformation X(z) of an input x[n] that will produce the output}
+    \begin{center}
+        $y[n] = -\dfrac{1}{3}(-\dfrac{1}{4})^n u[n] - \dfrac{4}{3}(2)^nu[-m-1]$.
+    \end{center}
+    
+
+    \textbf{Solution:-}
+    
+    \begin{align}
+        y[n] &= -\dfrac{1}{3}(-\dfrac{1}{4})^n u[n] - \dfrac{4}{3}(2)^nu[-m-1]. \\
+        Y(z) &= \dfrac{-\dfrac{1}{3}}{1+\dfrac{1}{4}z^{-1}} + \dfrac{\dfrac{4}{3}}{1-2z^{-1}} \\
+             &= \dfrac{1+z^{-1}}{(1+\dfrac{1}{4}z^{-1})(1-2z^{-1})} 
+    \end{align}
+
+    And we know that,
+    
+    \begin{equation}
+        H[n] = \dfrac{1+z^{-1}}{(1-\dfrac{1}{2}z^{-1})(1+\dfrac{1}{4}z^{-1})}
+    \end{equation}
+
+    Also we know that,
+
+    \begin{align}
+        X[z] &= \dfrac{Y[z]}{H[z]}  \hspace{30mm} \frac{1}{4}<|z|<2\\
+             &=\dfrac{(1-\dfrac{1}{2}z^{-1})}{(1-2z^{-1})} \hspace{25mm} |z| < 2 \\
+        x[n] &= -(2)^nu[-n-1] + \dfrac{1}{2}(2)^{n-1}u[-n]
+    \end{align}
+    
+\end{document}
