@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-n = 100
+n = 50
 alpha = (1 + np.sqrt(5))/2
 beta = (1 - np.sqrt(5))/2
 k = np.linspace(1, n, n)
@@ -13,8 +13,7 @@ sa = np.cumsum(ta)
 plt.stem(k,sa,label='Simulation')
 plt.axhline(y=10/89,color='r',label='Theoretical')
 plt.legend()
-plt.savefig('pingala/figs/1.2.eps')
-plt.savefig('pingala/figs/1.2.pdf')
-#plt.show()
-if (abs(sa[-1] - ans) < eps): print("1.2 correct")
-else: print("1.2 incorrect")
+plt.savefig('../figs/1.2.eps')
+plt.savefig('../figs/1.2.pdf')
+plt.show()
+
