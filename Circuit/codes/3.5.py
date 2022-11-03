@@ -16,6 +16,6 @@ for i in range(0,int(1e6),10000):
 data=np.array(data)
 plt.scatter(data[:,0],data[:,1],label='Ngspice Simulation',color='orange')
 plt.legend()
-plt.savefig('../figs/3.5.1.eps')
+#plt.savefig('../figs/3.5.1.eps')
 plt.savefig('../figs/3.5.1.pdf')
 plt.show()
