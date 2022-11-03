@@ -436,6 +436,27 @@ Using \eqref{eq:v2-t},
 	\begin{align}
 		H(z) &= \frac{\frac{1 + z^{-1}}{2R_2C_0}}{1 + \frac{1}{2R_1C_0} + \frac{1}{2R_2C_0} - z^{-1} + \frac{z^{-1}}{2R_1C_0} + \frac{z^{-1}}{2R_2C_0}} \\
 		&= \frac{2.5\times10^5 (1+z^{-1})}{7.5\times10^5 + 1 + (7.5\times10^5 - 1)z^{-1}}
-	\end{align}	
+	\end{align}
+	\item find y(n ).\\
+ \solution
+ let $a=\frac{R_1+R_2}{2C_0R_1R_2 }$
+ \begin{align}
+  Y(z)&=\frac{1+z^{-1}}{(1-z^{-1})R_2C_0\brak{1-z^{-1}+\brak{(1+z^{-1})\brak{a}}}}\\
+  \Rightarrow Y(z)&=\frac{1+z^{-1}}{R_2C_0(1+a)(1-z^{-1})\brak{1-\frac{1-a}{1+a}z^{-1}}}\\
+  \Rightarrow Y(z)&=\frac{1}{R_2C_0(1+a)a}\brak{\frac{a+1}{1-z^{-1}}-\frac{1}{1-\frac{(1-a)z^{-1}}{1+a}}}\\
+  \Rightarrow y(n )&=\frac{1}{R_2C_0(1+a)a}\brak{(a+1)u(n )-\brak{\frac{1-a}{1+a}}^{n}u(n )}
+ \end{align}
+ with $|z|>\min{(1,\frac{|1-a|}{a+1})}$.Above is for sampling period$=1s$.
+ In general, for T sampling period
+ \begin{align}
+  y(nT)&=\frac{T}{R_2C_0(1+aT)a}\brak{(aT+1)u(nT)-\brak{\frac{1-aT}{1+aT}}^{nT}u(nT)}
+ \end{align}
+ \begin{figure}[!ht]
+  \begin{center}
+  \includegraphics[width=\columnwidth]{./figs/4.7.png}
+  \end{center}
+  \captionof{figure}{}
+  \label{fig:xnyn}
+  \end{figure}s	
 	\end{enumerate}
 \end{document}
