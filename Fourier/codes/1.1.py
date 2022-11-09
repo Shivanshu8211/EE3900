@@ -1,16 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import math
-import scipy
+
 A=12
-f=50
-l = np.linspace(-50,50,1000)
-def y(t):
-    return A*abs(math.sin(2*3.14*f*t))
-y_t = scipy.vectorize(y)
-plt.plot(l,y_t(l),'k',label = "graph of x(t)")
-plt.xlabel("$t-->$")
-plt.ylabel("$x(t)-->$")
+f_0=50
+x=np.linspace(0,4/f_0,1000)
+y=np.abs(A*np.sin(2*np.pi*f_0*x))
+plt.plot(x,y,label=r'$|A\sin(2\pi f_0 t)|$',color='red')
+plt.title('$x(t) = A|\sin(2\pi f_0t)|$')
+plt.xlabel('t (in s)')
+plt.legend()
 plt.grid()
-plt.savefig("../figs/1.1.png")
+#plt.savefig('charger/figs/1.1.eps')
+#plt.savefig('charger/figs/1.1.pdf')
+plt.xlabel('t (in s)')
 plt.show()
+
+
+
+
